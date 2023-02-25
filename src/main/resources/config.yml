@@ -1,0 +1,13 @@
+sake_num: 1
+names:
+    - "§aわんちゃん焼酎"
+sakes:
+  "§aわんちゃん焼酎":
+    name: "§aわんちゃん焼酎"
+    price: 25000
+    description:
+      - "わんちゃん焼酎は、わんちゃん専用のお酒でした"
+      - "わんちゃんが飲むと、わんちゃんのようにになります"
+    probability: 2
+    get_price: 50000
+    expectation: "☆☆☆★★★"

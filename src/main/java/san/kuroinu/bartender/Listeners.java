@@ -94,7 +94,8 @@ public class Listeners implements Listener {
         if (sakes.contains(name)){
             int kitai = plugin.getConfig().getInt("sakes." + name + ".probability");
             int random = (int)(Math.random() * kitai);
-            if (random == 1){
+            int nannbunnnonannka = plugin.getConfig().getInt("sakes." + name + ".nannbunnnonannka");
+            if (random >= 1 && random >= nannbunnnonannka){
                 OfflinePlayer e = (OfflinePlayer) event.getPlayer();
                 EconomyResponse with = econ.depositPlayer(e, get_price);
                 if (with.transactionSuccess()){

@@ -1,10 +1,7 @@
 package san.kuroinu.bartender;
 
 import net.milkbowl.vault.economy.EconomyResponse;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +12,7 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,21 +27,29 @@ public class Listeners implements Listener {
         }
         if (event.getRightClicked().getCustomName().equals("Bartender") && event.getRightClicked().getType() == EntityType.VILLAGER) {
             event.setCancelled(true);
+            Player e = event.getPlayer();
             int sake_num = plugin.getConfig().getInt("sake_num");
             int gyusuu = sake_num / 9+1;
             Inventory inv = Bukkit.createInventory(null, gyusuu*9, prefix);
             String name;
             List<String> lore;
             List<String> sakes = plugin.getConfig().getStringList("names");
+            ItemStack item = null;
             for (int i = 0; i < sake_num; i++) {
                 lore = plugin.getConfig().getStringList("sakes." + sakes.get(i) + ".description");
                 lore.add("§e" + plugin.getConfig().getString("sakes." + sakes.get(i) + ".price") + "円");
                 lore.add("§b"+plugin.getConfig().getString("sakes." + sakes.get(i) + ".get_price")+"円獲得できます");
                 lore.add("期待度 "+plugin.getConfig().getString("sakes." + sakes.get(i) + ".expectation"));
                 name = sakes.get(i);
-                inv.addItem(createGuiItem(Material.POTION, name , lore.toArray(new String[0])));
+                item = createGuiItem(Material.POTION, name , lore.toArray(new String[0]));
+                PotionMeta meta = (PotionMeta) item.getItemMeta();
+                int Color_R = plugin.getConfig().getInt("sakes." + sakes.get(i) + ".Color_R");
+                int Color_G = plugin.getConfig().getInt("sakes." + sakes.get(i) + ".Color_G");
+                int Color_B = plugin.getConfig().getInt("sakes." + sakes.get(i) + ".Color_B");
+                meta.setColor(Color.fromRGB(Color_R, Color_G, Color_B));
+                inv.addItem(item);
             }
-            event.getPlayer().openInventory(inv);
+            e.openInventory(inv);
         }
     }
     @EventHandler
@@ -95,19 +101,18 @@ public class Listeners implements Listener {
             int kitai = plugin.getConfig().getInt("sakes." + name + ".probability");
             int random = (int)(Math.random() * kitai);
             int nannbunnnonannka = plugin.getConfig().getInt("sakes." + name + ".nannbunnnonannka");
-            if (random >= 1 && random >= nannbunnnonannka){
+            if (nannbunnnonannka >= random && random >= 1){
                 OfflinePlayer e = (OfflinePlayer) event.getPlayer();
                 EconomyResponse with = econ.depositPlayer(e, get_price);
                 if (with.transactionSuccess()){
                     event.getPlayer().sendMessage("§a" + name + "を飲んで" +ChatColor.GOLD+ get_price+ "円"+ChatColor.GREEN+"獲得しました");
-                    return;
                 }
             }else{
                 event.getPlayer().sendMessage("§c" + name + "を飲んで何も起こりませんでした");
             }
+            event.getPlayer().getInventory().setItemInMainHand(null);
         }
-    }
-    protected ItemStack createGuiItem(final Material material, final String name, final String... lore) {
+    }protected ItemStack createGuiItem(final Material material, final String name, final String... lore) {
         final ItemStack item = new ItemStack(material, 1);
         final ItemMeta meta = item.getItemMeta();
 
@@ -121,4 +126,5 @@ public class Listeners implements Listener {
 
         return item;
     }
+
 }

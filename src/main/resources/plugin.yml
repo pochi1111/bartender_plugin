@@ -1,4 +1,4 @@
 name: BarTender
 version: '${project.version}'
 main: san.kuroinu.bartender.BarTender
-api-version: 1.17
+api-version: 1.19

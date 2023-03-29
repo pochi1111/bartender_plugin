@@ -16,6 +16,7 @@ public final class BarTender extends JavaPlugin {
         // Plugin startup logic
         plugin = this;
         this.listeners = new Listeners();
+    
         getServer().getPluginManager().registerEvents(this.listeners, this);
         super.onEnable();
         if (!setupEconomy() ) {

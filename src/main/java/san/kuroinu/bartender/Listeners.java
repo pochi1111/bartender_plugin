@@ -110,7 +110,8 @@ public class Listeners implements Listener {
             }else{
                 event.getPlayer().sendMessage("§c" + name + "を飲んで何も起こりませんでした");
             }
-            event.getPlayer().getInventory().setItemInMainHand(null);
+            //メインハンドを空にする
+            event.getPlayer().getInventory().setItemInMainHand(new ItemStack(Material.AIR));
         }
     }protected ItemStack createGuiItem(final Material material, final String name, final String... lore) {
         final ItemStack item = new ItemStack(material, 1);

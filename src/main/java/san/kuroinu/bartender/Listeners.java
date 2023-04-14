@@ -106,6 +106,12 @@ public class Listeners implements Listener {
                 EconomyResponse with = econ.depositPlayer(e, get_price);
                 if (with.transactionSuccess()){
                     event.getPlayer().sendMessage("§a" + name + "を飲んで" +ChatColor.GOLD+ get_price+ "円"+ChatColor.GREEN+"獲得しました");
+                    if (plugin.getConfig().get("sakes." + name + ".mugen") != null){
+                        if (plugin.getConfig().getBoolean("sakes." + name + ".mugen")){
+                            event.setCancelled(true);
+                            return;
+                        }
+                    }
                 }
             }else{
                 event.getPlayer().sendMessage("§c" + name + "を飲んで何も起こりませんでした");

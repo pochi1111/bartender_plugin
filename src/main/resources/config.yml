@@ -15,6 +15,7 @@ names:
   - "§aアイアンウォッカ"
   - "§aアレイカクテル"
   - "§b§l羊のだし汁"
+  - "◇§9無限水源"
 
 sakes:
   "§aわんちゃん焼酎":
@@ -191,3 +192,17 @@ sakes:
     nannbunnnonannka: 1
     get_price: 90000
     expectation: "§e☆☆☆★★★"
+
+  "◇§9無限水源":
+    name: "◇§9無限水源"
+    price: 100000
+    description:
+      - "§f水が無限に出てくる水源"
+    probability: 10
+    nannbunnnonannka: 4
+    get_price: 90000
+    expectation: "§e§l??????"
+    mugen: true
+    Color_R: 30
+    Color_G: 144
+    Color_B: 255

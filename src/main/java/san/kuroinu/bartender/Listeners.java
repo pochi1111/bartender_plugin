@@ -47,6 +47,7 @@ public class Listeners implements Listener {
                 int Color_G = plugin.getConfig().getInt("sakes." + sakes.get(i) + ".Color_G");
                 int Color_B = plugin.getConfig().getInt("sakes." + sakes.get(i) + ".Color_B");
                 meta.setColor(Color.fromRGB(Color_R, Color_G, Color_B));
+                item.setItemMeta(meta);
                 inv.addItem(item);
             }
             e.openInventory(inv);
@@ -73,12 +74,12 @@ public class Listeners implements Listener {
                     }
                     EconomyResponse with = econ.withdrawPlayer(p, price);
                     if (with.transactionSuccess()){
-                        e.sendMessage("§a" + name + "を購入しました");
+                        e.sendMessage(name + "§aを購入しました");
                         ItemStack item = event.getCurrentItem();
                         e.getInventory().addItem(item);
                         return;
                     }else{
-                        e.sendMessage("§c" + name + "を購入できませんでした");
+                        e.sendMessage(name + "§cを購入できませんでした");
                     }
                 } else {
                     e.sendMessage("§cお金が足りません");
@@ -99,13 +100,13 @@ public class Listeners implements Listener {
         List<String> sakes = plugin.getConfig().getStringList("names");
         if (sakes.contains(name)){
             int kitai = plugin.getConfig().getInt("sakes." + name + ".probability");
-            int random = (int)(Math.random() * kitai);
+            int random = (int)(Math.random() * kitai)+1;
             int nannbunnnonannka = plugin.getConfig().getInt("sakes." + name + ".nannbunnnonannka");
-            if (nannbunnnonannka >= random && random >= 1){
+            if (nannbunnnonannka+1 >= random && random >= 1){
                 OfflinePlayer e = (OfflinePlayer) event.getPlayer();
                 EconomyResponse with = econ.depositPlayer(e, get_price);
                 if (with.transactionSuccess()){
-                    event.getPlayer().sendMessage("§a" + name + "を飲んで" +ChatColor.GOLD+ get_price+ "円"+ChatColor.GREEN+"獲得しました");
+                    event.getPlayer().sendMessage(name + ChatColor.GREEN +"を飲んで" +ChatColor.GOLD+ get_price+ "円"+ChatColor.GREEN+"獲得しました");
                     if (plugin.getConfig().get("sakes." + name + ".mugen") != null){
                         if (plugin.getConfig().getBoolean("sakes." + name + ".mugen")){
                             event.setCancelled(true);
@@ -114,7 +115,7 @@ public class Listeners implements Listener {
                     }
                 }
             }else{
-                event.getPlayer().sendMessage("§c" + name + "を飲んで何も起こりませんでした");
+                event.getPlayer().sendMessage(name + "§cを飲んで何も起こりませんでした");
             }
             //メインハンドを空にする
             event.getPlayer().getInventory().setItemInMainHand(new ItemStack(Material.AIR));

@@ -4,6 +4,7 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import san.kuroinu.bartender.commands.BartenderCommand;
 
 public final class BarTender extends JavaPlugin {
     public static JavaPlugin plugin;
@@ -23,6 +24,7 @@ public final class BarTender extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        getCommand("bartender").setExecutor(new BartenderCommand());
         plugin.saveDefaultConfig();
     }
 

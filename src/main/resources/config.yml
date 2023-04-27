@@ -1,198 +1,4 @@
-sake_num: 16
-names:
-  - "§aわんちゃん焼酎"
-  - "§aまっちわいん"
-  - "§c§lしゅらのだし汁"
-  - "§aGMワイン"
-  - "§aハニーアップルジュース"
-  - "§aM·C·A"
-  - "§aダイヤモンドディアプロ"
-  - "§a午前の生"
-  - "§aドロップレイン"
-  - "§aスライムラム"
-  - "§aラベジャースコッチ"
-  - "§aクリックルンウォーター"
-  - "§aアイアンウォッカ"
-  - "§aアレイカクテル"
-  - "§b§l羊のだし汁"
-  - "◇§9無限水源"
-
 sakes:
-  "§aわんちゃん焼酎":
-    name: "§aわんちゃん焼酎"
-    price: 25000
-    description:
-      - "わんちゃん焼酎は、わんちゃん専用のお酒でした"
-      - "わんちゃんが飲むと、わんちゃんのようにになります"
-    probability: 2
-    nannbunnnonannka: 1
-    get_price: 50000
-    expectation: "☆☆☆★★★"
-
-  "§c§lしゅらのだし汁":
-    name: "§c§lしゅらのだし汁"
-    price: 10000
-    description:
-      - "しゅらからとられただし汁...?"
-      - "当たるとものすごく美味しい!"
-    probability: 1000
-    nannbunnnonannka: 1
-    get_price: 10000000
-    expectation: "★★★★★★"
-
-  "§aまっちわいん":
-    name: "§aまっちわいん"
-    price: 1000
-    description:
-      - "まっちわいんだよ"
-      - "確率高いと思う！"
-    probability: 4
-    nannbunnnonannka: 1
-    get_price: 3000
-    expectation: "☆☆☆☆☆★"
-
-  "§aGMワイン":
-    name: "§aGMワイン"
-    price: 500
-    description:
-      - "GMが作った手作りのお酒"
-      - "確率操作がされているかも....?"
-    probability: 1000
-    nannbunnnonannka: 1
-    get_price: 1500000
-    expectation: "☆☆☆☆☆☆"
-
-  "§aハニーアップルジュース":
-    name: "§aハニーアップルジュース"
-    price: 100
-    description:
-      - "これは希少なはちみつを使っているらしいんだが、なぜこんなに安いんだろうか、、？"
-      - "お酒だと思っただろう？これは普通のジュースさ風邪のときに飲むといいぞ"
-    probability:
-    nannbunnnonannka: 1
-    get_price: 500
-    expectation: "☆☆☆☆★★"
-
-  "§aM·C·A":
-    name: "§aM·C·A"
-    price: 2011
-    description:
-      - "このお酒はこのワールドが始まってからずっと熟成していたのだ"
-      - "いろいろマイクラにかかわることがこの酒には隠されている"
-    probability: 18
-    nannbunnnonannka: 11
-    get_price: 3960
-    expectation: "☆☆★★★★"
-
-  "§aダイヤモンドディアプロ":
-    name: "§aダイヤモンドディアプロ"
-    price: 5500
-    description:
-      - "これはみんながしってるダイヤモンドをお酒にしたものだ"
-      - "ダイヤモンド飲んで大丈夫？お任せあれ秘密の方法でろ過をし飲めるようにしてあるのさ"
-    probability: 8
-    nannbunnnonannka: 3
-    get_price: 12000
-    expectation: "☆☆☆☆★★"
-
-  "§aGM確率操作酒":
-    name: "§aGM確率操作酒"
-    price: 1
-    description:
-      - "GMさんが確率操作をしているお酒....."
-      - "当たるわけがないよな....."
-    probability: 1000000
-    nannbunnnonannka: 1
-    get_price: 3000000
-    expectation: "-------"
-
-  "§a午前の生":
-    name: "§a午前の生"
-    price: 5000
-    description:
-      - "このお酒は限らてた時間でしか作ることがてぎない"
-      - "太陽の日を浴びているので午前に飲むのがピッタリ！"
-    probability: 5
-    nannbunnnonannka: 3
-    get_price: 7000
-    expectation: "☆☆★★★★"
-
-  "§aドロップレイン":
-    name: "§aドロップレイン"
-    price: 10000
-    description:
-      - "普通の酒とは少し違った手法で作られてる"
-      - "中には経験値のような緑色の玉が浮いている...."
-    probability: 1
-    nannbunnnonannka: 5
-    get_price: 15000
-    expectation: "☆☆☆☆★★"
-
-  "§aスライムラム":
-    name: "§aスライムラム"
-    price: 2500
-    description:
-      - "少し粘り気がくせになる"
-      - "稀に少し粘りすぎて飲めないこともたたあるとか...."
-    probability: 5
-    nannbunnnonannka: 2
-    get_price: 5000
-    expectation: "☆☆★★★★"
-
-  "§aラベジャースコッチ":
-    name: "§aラベジャースコッチ"
-    price: 100000
-    description:
-      - "これは獣の匂いがする"
-      - "当たるときの爽快感を楽しもう...."
-    probability: 3
-    nannbunnnonannka: 1
-    get_price: 300000
-    expectation: "☆☆☆☆★★"
-
-  "§aクリックルンウォーター":
-    name: "§aクリックルンウォーター"
-    price: 6666
-    description:
-      - "神を信じて飲もう"
-      - "当たると心がウキウキする...."
-    probability: 777
-    nannbunnnonannka: 7
-    get_price: 777777
-    expectation: "☆☆☆☆☆☆"
-
-  "§aアイアンウォッカ":
-    name: "§aアイアンウォッカ"
-    price: 400
-    description:
-      - "味や匂いはまるで鉄のようだ"
-      - "この味くせにっなるぅぅぅ...."
-    probability: 20
-    nannbunnnonannka: 11
-    get_price: 700
-    expectation: "☆☆★★★★"
-
-  "§aアレイカクテル":
-    name: "§aアレイカクテル"
-    price: 1000
-    description:
-      - "味はすこし甘みが強い"
-      - "当たると空を飛べる決心が湧いてきそうだ...."
-    probability: 10
-    nannbunnnonannka: 1
-    get_price: 3000
-    expectation: "☆☆☆☆☆★"
-
-  "§b§l羊のだし汁":
-    name: "§b§l羊のだし汁"
-    price: 30000
-    description:
-      - "§fSh○raからとられた極上だし汁...?"
-    probability: 3　　
-    nannbunnnonannka: 1
-    get_price: 90000
-    expectation: "§e☆☆☆★★★"
-
   "◇§9無限水源":
     name: "◇§9無限水源"
     price: 100000
@@ -206,3 +12,18 @@ sakes:
     Color_R: 30
     Color_G: 144
     Color_B: 255
+
+  "§fビーコネーター":
+    name: "§fビーコネーター"
+    price: 123456
+    description:
+      - "採掘が捗りそう…"
+    probability: 100
+    nannbunnnonannka: 9
+    get_price: 1234567
+    expectation: "☆☆☆☆★"
+    Color_R: 255
+    Color_G: 255
+    Color_B: 255
+    commands:
+      - "effect give [name] haste 2 10"

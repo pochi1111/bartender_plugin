@@ -2,6 +2,7 @@ package san.kuroinu.bartender;
 
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.*;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,8 +15,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 
-import java.util.Arrays;
-import java.util.List;
+import javax.security.auth.login.Configuration;
+import java.util.*;
 
 import static san.kuroinu.bartender.BarTender.*;
 
@@ -28,12 +29,17 @@ public class Listeners implements Listener {
         if (event.getRightClicked().getCustomName().equals("Bartender") && event.getRightClicked().getType() == EntityType.VILLAGER) {
             event.setCancelled(true);
             Player e = event.getPlayer();
-            int sake_num = plugin.getConfig().getInt("sake_num");
+            ConfigurationSection sec = plugin.getConfig().getConfigurationSection("sakes");
+            Set<String> sake_set = sec.getKeys(false);
+            int sake_num = sake_set.size();
             int gyusuu = sake_num / 9+1;
             Inventory inv = Bukkit.createInventory(null, gyusuu*9, prefix);
             String name;
             List<String> lore;
-            List<String> sakes = plugin.getConfig().getStringList("names");
+            List<String> sakes = new ArrayList<>();
+            for (String s : sake_set) {
+                sakes.add(s);
+            }
             ItemStack item = null;
             for (int i = 0; i < sake_num; i++) {
                 lore = plugin.getConfig().getStringList("sakes." + sakes.get(i) + ".description");
@@ -60,7 +66,12 @@ public class Listeners implements Listener {
             OfflinePlayer p = (OfflinePlayer) event.getWhoClicked();
             event.setCancelled(true);
             String name = event.getCurrentItem().getItemMeta().getDisplayName();
-            List<String> sakes = plugin.getConfig().getStringList("names");
+            ConfigurationSection sec = plugin.getConfig().getConfigurationSection("sakes");
+            Set<String> sake_set = sec.getKeys(false);
+            List<String> sakes = new ArrayList<>();
+            for (String s : sake_set) {
+                sakes.add(s);
+            }
 
             if (sakes.contains(name)) {
                 int price = plugin.getConfig().getInt("sakes." + name + ".price");
@@ -96,17 +107,30 @@ public class Listeners implements Listener {
             return;
         }
         String name = item.getItemMeta().getDisplayName();
-        int get_price = plugin.getConfig().getInt("sakes." + name + ".get_price");
-        List<String> sakes = plugin.getConfig().getStringList("names");
+        ConfigurationSection sec = plugin.getConfig().getConfigurationSection("sakes");
+        Set<String> sake_set = sec.getKeys(false);
+        List<String> sakes = new ArrayList<>();
+        for (String s : sake_set) {
+            sakes.add(s);
+        }
         if (sakes.contains(name)){
+            int get_price = plugin.getConfig().getInt("sakes." + name + ".get_price");
             int kitai = plugin.getConfig().getInt("sakes." + name + ".probability");
-            int random = (int)(Math.random() * kitai)+1;
+            Random rand = new Random();int random = rand.nextInt(kitai)+1;
             int nannbunnnonannka = plugin.getConfig().getInt("sakes." + name + ".nannbunnnonannka");
-            if (nannbunnnonannka >= random && random >= 1){
+            if (nannbunnnonannka >= random){
                 OfflinePlayer e = (OfflinePlayer) event.getPlayer();
                 EconomyResponse with = econ.depositPlayer(e, get_price);
                 if (with.transactionSuccess()){
                     event.getPlayer().sendMessage(name + ChatColor.GREEN +"を飲んで" +ChatColor.GOLD+ get_price+ "円"+ChatColor.GREEN+"獲得しました");
+                    List<String> commands = plugin.getConfig().getStringList("sakes." + name + ".commands");
+                    for (String command : commands){
+                        //commandの中の[name]をプレイヤー名に置き換える
+                        String player_name = event.getPlayer().getName();
+                        command = command.replace("[name]", player_name);
+                        //commandを実行
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+                    }
                     if (plugin.getConfig().get("sakes." + name + ".mugen") != null){
                         if (plugin.getConfig().getBoolean("sakes." + name + ".mugen")){
                             event.setCancelled(true);

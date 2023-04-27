@@ -29,6 +29,10 @@ public class Listeners implements Listener {
         if (event.getRightClicked().getCustomName().equals("Bartender") && event.getRightClicked().getType() == EntityType.VILLAGER) {
             event.setCancelled(true);
             Player e = event.getPlayer();
+            if (plugin.getConfig().getInt("turn") == 0 && !e.isOp()){
+                e.sendMessage(prefix+ChatColor.RED+"現在は営業時間外です");
+                return;
+            }
             ConfigurationSection sec = plugin.getConfig().getConfigurationSection("sakes");
             Set<String> sake_set = sec.getKeys(false);
             int sake_num = sake_set.size();
@@ -76,7 +80,9 @@ public class Listeners implements Listener {
             if (sakes.contains(name)) {
                 int price = plugin.getConfig().getInt("sakes." + name + ".price");
                 int get_price = plugin.getConfig().getInt("sakes." + name + ".get_price");
-                e.closeInventory();
+                if (!event.isShiftClick()){
+                    e.closeInventory();
+                }
                 int money = (int) econ.getBalance(p);
                 if (money >= price) {
                     if (e.getInventory().firstEmpty() == -1){
@@ -118,6 +124,11 @@ public class Listeners implements Listener {
             int kitai = plugin.getConfig().getInt("sakes." + name + ".probability");
             Random rand = new Random();int random = rand.nextInt(kitai)+1;
             int nannbunnnonannka = plugin.getConfig().getInt("sakes." + name + ".nannbunnnonannka");
+            if (plugin.getConfig().getInt("debug_log") == 1 && event.getPlayer().isOp()){
+                event.getPlayer().sendMessage("§a"+name+"§eの期待度は"+kitai+"です");
+                event.getPlayer().sendMessage("§a"+name+"§eの確率は"+nannbunnnonannka+"です");
+                event.getPlayer().sendMessage("§a"+name+"§eの乱数は"+random+"です");
+            }
             if (nannbunnnonannka >= random){
                 OfflinePlayer e = (OfflinePlayer) event.getPlayer();
                 EconomyResponse with = econ.depositPlayer(e, get_price);

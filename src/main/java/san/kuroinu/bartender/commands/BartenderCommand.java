@@ -20,6 +20,39 @@ public class BartenderCommand implements CommandExecutor {
             plugin.reloadConfig();
             sender.sendMessage(prefix+ ChatColor.AQUA+"Configを更新しました");
         }
+
+        if (args[0].equals("help")){
+            if (!sender.isOp()){
+                sender.sendMessage(prefix+ ChatColor.RED+"権限がありません");
+                return false;
+            }
+            sender.sendMessage(prefix+ ChatColor.AQUA+"BarTenderのヘルプです");
+            sender.sendMessage(prefix+ ChatColor.AQUA+"/bartender reload: Configを更新します");
+        }
+
+        if (args[0].equals("turn")){
+            if (!sender.isOp()){
+                sender.sendMessage(prefix+ ChatColor.RED+"権限がありません");
+                return false;
+            }
+            if (args[1] == "on" || args[1] == "off"){
+                if (args[1] == "on"){
+                    plugin.getConfig().set("turn", 1);
+                    plugin.saveConfig();
+                    plugin.reloadConfig();
+                    sender.sendMessage(prefix+ ChatColor.AQUA+"BarTenderを有効にしました");
+                }else{
+                    plugin.getConfig().set("turn", 0);
+                    plugin.saveConfig();
+                    plugin.reloadConfig();
+                    sender.sendMessage(prefix+ ChatColor.AQUA+"BarTenderを無効にしました");
+                }
+            }else{
+                sender.sendMessage(prefix+ ChatColor.RED+"引数が不正です");
+                sender.sendMessage(prefix+ ChatColor.RED+"/bartender turn on/off");
+            }
+        }
+
         return false;
     }
 }

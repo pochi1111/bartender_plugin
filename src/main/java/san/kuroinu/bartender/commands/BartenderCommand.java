@@ -28,6 +28,7 @@ public class BartenderCommand implements CommandExecutor {
             }
             sender.sendMessage(prefix+ ChatColor.AQUA+"BarTenderのヘルプです");
             sender.sendMessage(prefix+ ChatColor.AQUA+"/bartender reload: Configを更新します");
+            sender.sendMessage(prefix+ ChatColor.AQUA+"/bartender turn on/off: BarTenderを有効/無効にします");
         }
 
         if (args[0].equals("turn")){

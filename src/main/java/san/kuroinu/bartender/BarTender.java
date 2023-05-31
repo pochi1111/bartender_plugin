@@ -44,6 +44,7 @@ public final class BarTender extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        super.onDisable();
     }
 
     private static JavaPlugin getPlugin() {
